@@ -52,6 +52,10 @@
   return self;
 }
 
+void logRect(NSString* message, CGRect r) {
+    NSLog(@"%@: %f,%f %f,%f", message, CGRectGetMinX(r), CGRectGetMinY(r), CGRectGetMaxX(r), CGRectGetMaxY(r));
+}
+
 - (SpectacleWindowPositionCalculationResult *)calculateWindowRect:(CGRect)windowRect
                                        visibleFrameOfSourceScreen:(CGRect)visibleFrameOfSourceScreen
                                   visibleFrameOfDestinationScreen:(CGRect)visibleFrameOfDestinationScreen
@@ -59,13 +63,19 @@
 {
   JSValue *windowPositionCalculation = [_windowPositionCalculationRegistry windowPositionCalculationWithAction:action];
   if (!windowPositionCalculation) {
+      NSLog(@"no calc found for %@", action);
     return nil;
   }
+  NSLog(@"sending to calculator %@, action %@", windowPositionCalculation, action);
+    logRect(@"windowRect", windowRect);
+    logRect(@"visibleFrameOfSourceScreen", visibleFrameOfSourceScreen);
+    logRect(@"visibleFrameOfDestinationScreen", visibleFrameOfDestinationScreen);
   JSValue *result = [windowPositionCalculation callWithArguments:@[
                                                                    [_javaScriptEnvironment valueWithRect:windowRect],
                                                                    [_javaScriptEnvironment valueWithRect:visibleFrameOfSourceScreen],
                                                                    [_javaScriptEnvironment valueWithRect:visibleFrameOfDestinationScreen],
                                                                    ]];
+    logRect(@"result", [result toRect]);
   return [SpectacleWindowPositionCalculationResult resultWithAction:action windowRect:[result toRect]];
 }
 

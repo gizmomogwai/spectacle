@@ -26,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet NSMenuItem *redoLastMoveShortcutMenuItem;
 @property (nonatomic, strong) IBOutlet NSMenuItem *disableShortcutsForAnHourMenuItem;
 @property (nonatomic, strong) IBOutlet NSMenuItem *disableShortcutsForApplicationMenuItem;
+@property (nonatomic, strong) IBOutlet NSMenuItem *superMoveUpMenuItem;
 
 - (IBAction)showPreferencesWindow:(id)sender;
 
@@ -51,5 +52,5 @@
 - (IBAction)disableOrEnableShortcutsForApplication:(id)sender;
 
 - (IBAction)openSystemPreferences:(id)sender;
-
+- (IBAction)superMoveUpMenuItem:(id)sender;
 @end

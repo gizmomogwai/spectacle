@@ -68,6 +68,7 @@
   [SpectacleUtilities registerDefaultsForBundle:[NSBundle mainBundle]];
   _shortcutMenuItems = @{
                          @"MoveToCenter": _moveToCenterShortcutMenuItem,
+                         @"SuperMoveUp": _superMoveUpMenuItem,
                          @"MoveToFullscreen": _moveToFullscreenShortcutMenuItem,
                          @"MoveToLeftHalf": _moveToLeftShortcutMenuItem,
                          @"MoveToRightHalf": _moveToRightShortcutMenuItem,
@@ -136,6 +137,30 @@
 {
   [_windowPositionManager moveFrontmostWindowElement:[SpectacleAccessibilityElement frontmostWindowElement]
                                               action:kSpectacleWindowActionFullscreen];
+}
+- (IBAction)superMoveUpMenuItem:(id)sender
+{
+    [_windowPositionManager moveFrontmostWindowElement:[SpectacleAccessibilityElement frontmostWindowElement]
+                                                action:kSpectacleWindowActionSuperUp];
+
+}
+- (IBAction)superMoveDownMenuItem:(id)sender
+{
+    [_windowPositionManager moveFrontmostWindowElement:[SpectacleAccessibilityElement frontmostWindowElement]
+                                                action:kSpectacleWindowActionSuperDown];
+
+}
+- (IBAction)superMoveLeftMenuItem:(id)sender
+{
+    [_windowPositionManager moveFrontmostWindowElement:[SpectacleAccessibilityElement frontmostWindowElement]
+                                                action:kSpectacleWindowActionSuperLeft];
+
+}
+- (IBAction)superMoveRightMenuItem:(id)sender
+{
+    [_windowPositionManager moveFrontmostWindowElement:[SpectacleAccessibilityElement frontmostWindowElement]
+                                                action:kSpectacleWindowActionSuperRight];
+
 }
 
 - (IBAction)moveFrontmostWindowToCenter:(id)sender

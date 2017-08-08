@@ -21,6 +21,10 @@ extern SpectacleWindowAction *const kSpectacleWindowActionNextDisplay;
 extern SpectacleWindowAction *const kSpectacleWindowActionPreviousDisplay;
 extern SpectacleWindowAction *const kSpectacleWindowActionNextThird;
 extern SpectacleWindowAction *const kSpectacleWindowActionPreviousThird;
+extern SpectacleWindowAction *const kSpectacleWindowActionSuperUp;
+extern SpectacleWindowAction *const kSpectacleWindowActionSuperDown;
+extern SpectacleWindowAction *const kSpectacleWindowActionSuperLeft;
+extern SpectacleWindowAction *const kSpectacleWindowActionSuperRight;
 
 BOOL SpectacleIsUndoWindowAction(SpectacleWindowAction *action);
 BOOL SpectacleIsRedoWindowAction(SpectacleWindowAction *action);
