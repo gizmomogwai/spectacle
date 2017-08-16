@@ -63,6 +63,42 @@ var SpectacleCalculationHelpers = (function () {
     var isTopOrBottomHalf = function(rect, total) {
         return isTopHalf(rect, total) || isBottomHalf(rect, total);
     };
+    var isTopLeft = function(rect, total) {
+        return almostEqual(rect, calcTopLeft(total));
+    };
+    var isBottomLeft = function(rect, total) {
+        return almostEqual(rect, calcBottomLeft(total));
+    };
+    var isTopRight = function(rect, total) {
+        return almostEqual(rect, calcTopRight(total));
+    };
+    var isBottomRight = function(rect, total) {
+        return almostEqual(rect, calcBottomRight(total));
+    };
+    var calcTopLeft = function(total) {
+        return calcTopHalf(calcLeftHalf(total));
+    };
+    var calcBottomLeft = function(total) {
+        return calcBottomHalf(calcLeftHalf(total));
+    };
+    var calcTopRight = function(total) {
+        return calcTopHalf(calcRightHalf(total));
+    };
+    var calcBottomRight = function(total) {
+        return calcBottomHalf(calcRightHalf(total));
+    };
+    var calcFullWidth = function(r, total) {
+        var res = copyRect(r);
+        res.x = 0;
+        res.width = total.width;
+        return res;
+    };
+    var calcFullHeight = function(r, total) {
+        var res = copyRect(r);
+        res.y = 0;
+        res.height = total.height;
+        return res;
+    };
     return {
         copyRect: copyRect,
         rectCenteredWithinRect: rectCenteredWithinRect,
@@ -78,5 +114,11 @@ var SpectacleCalculationHelpers = (function () {
         calcBottomHalf: calcBottomHalf,
         calcLeftHalf: calcLeftHalf,
         calcRightHalf: calcRightHalf,
+        isTopLeft: isTopLeft,
+        isBottomLeft: isBottomLeft,
+        isTopRight: isTopRight,
+        isBottomRight: isBottomRight,
+        calcFullWidth: calcFullWidth,
+        calcFullHeight: calcFullHeight,
     };
 })();

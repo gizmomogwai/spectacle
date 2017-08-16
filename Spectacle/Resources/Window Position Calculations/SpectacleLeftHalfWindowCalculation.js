@@ -1,11 +1,19 @@
 windowPositionCalculationRegistry.registerWindowPositionCalculationWithAction(
-    function (windowRect, visibleFrameOfSourceScreen, visibleFrameOfDestinationScreen) {
-        if (SpectacleCalculationHelpers.isLeftHalf(windowRect, visibleFrameOfDestinationScreen)) {
-            return SpectacleCalculationHelpers.copyRect(visibleFrameOfDestinationScreen);
+    function (r, visibleFrameOfSourceScreen, total) {
+        if (SpectacleCalculationHelpers.isBottomRight(r, total) || SpectacleCalculationHelpers.isTopRight(r, total)) {
+            return SpectacleCalculationHelpers.calcFullWidth(r, total);
         }
 
-        var r = SpectacleCalculationHelpers.isTopOrBottomHalf(windowRect, visibleFrameOfDestinationScreen) ?
-            windowRect : visibleFrameOfDestinationScreen;
+        if (SpectacleCalculationHelpers.isBottomHalf(r, total) || SpectacleCalculationHelpers.isTopHalf(r, total)) {
+            return SpectacleCalculationHelpers.calcLeftHalf(r, total);
+        }
 
-        return SpectacleCalculationHelpers.calcLeftHalf(r);
+        if (SpectacleCalculationHelpers.isLeftHalf(r, total)) {
+            return total;
+        }
+
+        if (SpectacleCalculationHelpers.isRightHalf(r, total)) {
+            // todo back to float
+        }
+        return r;
     }, "SpectacleWindowActionLeftHalf");

@@ -1,11 +1,22 @@
 windowPositionCalculationRegistry.registerWindowPositionCalculationWithAction(
-    function (windowRect, visibleFrameOfSourceScreen, visibleFrameOfDestinationScreen) {
-        if (SpectacleCalculationHelpers.isBottomHalf(windowRect, visibleFrameOfDestinationScreen)) {
-            return SpectacleCalculationHelpers.copyRect(visibleFrameOfDestinationScreen);
+    function (r, visibleFrameOfSourceScreen, total) {
+        if (SpectacleCalculationHelpers.isTopLeft(r, total) || SpectacleCalculationHelpers.isTopRight(r, total)) {
+            return calcFullHeight(r, total);
         }
 
-        var r = SpectacleCalculationHelpers.isLeftOrRightHalf(windowRect, visibleFrameOfDestinationScreen) ?
-            windowRect : visibleFrameOfDestinationScreen;
+        if (SpectacleCalculationHelpers.isLeftHalf(r, total) || SpectacleCalculationHelpers.isRightHalf(r, total)) {
+            return calcBottomHalf(r, total);
+        }
 
-        return SpectacleCalculationHelpers.calcBottomHalf(r);
+        if (SpectacleCalculationHelpers.isBottomHalf(r, total)) {
+            return total;
+        }
+
+        if (SpectacleCalculationHelpers.isTopHalf(r, total)) {
+            // todo
+        }
+        if (SpectacleCalculationHelpers.almostEqual(r, total)) {
+            return SpectacleCalculationHelpers.calcBottomHalf(total);
+        }
+        return r;
     }, "SpectacleWindowActionBottomHalf");
