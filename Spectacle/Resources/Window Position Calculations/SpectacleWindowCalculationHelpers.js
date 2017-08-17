@@ -16,12 +16,23 @@ var SpectacleCalculationHelpers = (function () {
         return (rect1.width <= rect2.width) && (rect1.height <= rect2.height);
     };
     var almostEqual = function(rect1, rect2) {
-        if (Math.abs(rect1.x - rect2.x) > 10) return false;
-        if (Math.abs(rect1.y - rect2.y) > 10) return false;
-        if (Math.abs(rect1.x + rect1.width - rect2.x - rect2.width) > 10) return false;
-        if (Math.abs(rect1.y + rect1.height - rect2.y - rect2.height) > 10) return false;
+        if (Math.abs(rect1.x - rect2.x) > 30) return false;
+        if (Math.abs(rect1.y - rect2.y) > 30) return false;
+        if (Math.abs(rect1.x + rect1.width - rect2.x - rect2.width) > 60) return false;
+        if (Math.abs(rect1.y + rect1.height - rect2.y - rect2.height) > 60) return false;
 
         return true;
+    };
+    var calcCentered = function(r, total) {
+        var midX = total.x + total.width / 2.0;
+        var midY = total.y + total.height / 2.0;
+
+        return {
+            x: midX - r.width / 2.0,
+            y: midY - r.height / 2.0,
+            width: r.width,
+            height: r.height,
+        };
     };
     var calcLeftHalf = function(rect) {
         var left = copyRect(rect);
@@ -120,5 +131,6 @@ var SpectacleCalculationHelpers = (function () {
         isBottomRight: isBottomRight,
         calcFullWidth: calcFullWidth,
         calcFullHeight: calcFullHeight,
+        calcCentered: calcCentered,
     };
 })();

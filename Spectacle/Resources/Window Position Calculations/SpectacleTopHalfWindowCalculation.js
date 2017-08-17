@@ -3,17 +3,20 @@ windowPositionCalculationRegistry.registerWindowPositionCalculationWithAction(
         if (SpectacleCalculationHelpers.isBottomLeft(r, total) || SpectacleCalculationHelpers.isBottomRight(r, total)) {
             return SpectacleCalculationHelpers.calcFullHeight(r, total);
         }
-
+        if (SpectacleCalculationHelpers.isTopRight(r, total) || SpectacleCalculationHelpers.isTopLeft(r, total)) {
+            return SpectacleCalculationHelpers.calcTopHalf(total, total);
+        }
         if (SpectacleCalculationHelpers.isLeftHalf(r, total) || SpectacleCalculationHelpers.isRightHalf(r, total)) {
             return SpectacleCalculationHelpers.calcTopHalf(r, total);
         }
-
         if (SpectacleCalculationHelpers.isTopHalf(r, total)) {
             return total;
         }
-
-        if (SpectacleCalculationHelpers.isBottomHalf(r, total)) {
-            // todo snap to floating pos
+        if (SpectacleCalculationHelpers.almostEqual(r, total)) {
+            return SpectacleCalculationHelpers.calcTopHalf(total);
         }
-        return r;
+        if (SpectacleCalculationHelpers.isBottomHalf(r, total)) {
+            return SpectacleCalculationHelpers.calcCentered(r, total);
+        }
+        return SpectacleCalculationHelpers.calcTopHalf(total, total);
 }, "SpectacleWindowActionTopHalf");
